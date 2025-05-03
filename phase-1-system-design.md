@@ -46,7 +46,7 @@
 ---
 ### 1. POST `/api/students`
 
-**Description**: Add a new student along with subjects, marks, and final comment.
+**Description**: Add a new student along with subjects, marks.
 
 #### Request Body
 
