@@ -1,0 +1,47 @@
+{% extends 'app/base.html' %}
+
+{% block content %}
+<h2>Edit Student</h2>
+<form method="post">
+  {% csrf_token %}
+  <div class="mb-3">
+    <label>First Name</label>
+    <input type="text" name="first_name" class="form-control" value="{{ student.first_name }}" required>
+  </div>
+  <div class="mb-3">
+    <label>Last Name</label>
+    <input type="text" name="last_name" class="form-control" value="{{ student.last_name }}" required>
+  </div>
+  <div class="mb-3">
+    <label>Roll Number</label>
+    <input type="text" name="roll_number" class="form-control" value="{{ student.roll_number }}" required>
+  </div>
+  <div class="mb-3">
+    <label>Class</label>
+    <input type="text" name="class_name" class="form-control" value="{{ student.class_ref.name }}" required>
+  </div>
+  <div class="mb-3">
+    <label>Section</label>
+    <input type="text" name="section" class="form-control" value="{{ student.class_ref.section }}" required>
+  </div>
+
+  <h4>Subjects & Marks</h4>
+  <div id="subjects-area">
+    {% for mark in marks %}
+    <div class="subject-entry mb-3">
+      <input type="text" name="subject_name[]" value="{{ mark.subject.name }}" class="form-control mb-1" required>
+      <input type="number" name="marks_obtained[]" value="{{ mark.marks_obtained }}" class="form-control mb-1" required>
+      <input type="number" name="maximum_marks[]" value="{{ mark.maximum_marks }}" class="form-control mb-1" required>
+      <input type="text" name="comment[]" value="{{ mark.comment }}" class="form-control mb-1">
+    </div>
+    {% endfor %}
+  </div>
+
+  <div class="mb-3">
+    <label>Final Comment</label>
+    <textarea name="final_comment" class="form-control">{{ final_comment.comment }}</textarea>
+  </div>
+
+  <button type="submit" class="btn btn-primary">Update Student</button>
+</form>
+{% endblock %}

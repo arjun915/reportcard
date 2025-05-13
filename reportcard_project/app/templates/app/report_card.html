@@ -1,0 +1,34 @@
+{% extends 'app/base.html' %}
+{% block content %}
+<h2>Report Card</h2>
+<p><strong>Name:</strong> {{ student.first_name }} {{ student.last_name }}</p>
+<p><strong>Roll Number:</strong> {{ student.roll_number }}</p>
+<p><strong>Class:</strong> {{ student.class_id.name }} {{ student.class_id.section }}</p>
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Subject</th>
+      <th>Marks Obtained</th>
+      <th>Maximum Marks</th>
+      <th>Comment</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for mark in marks %}
+    <tr>
+      <td>{{ mark.subject_id.name }}</td>
+      <td>{{ mark.marks_obtained }}</td>
+      <td>{{ mark.maximum_marks }}</td>
+      <td>{{ mark.comment }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<p><strong>Final Grade:</strong> {{ final_grade }}</p>
+<p><strong>Principal Comment:</strong> {{ principal_comment }}</p>
+
+<button onclick="window.print()" class="btn btn-info">🖨️ Print</button>
+<a href="{% url 'download_pdf' student.id %}" class="btn btn-danger">⬇️ Download as PDF</a>
+{% endblock %}

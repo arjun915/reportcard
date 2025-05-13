@@ -1,0 +1,55 @@
+{% extends 'app/base.html' %}
+
+{% block content %}
+<h2>Add Student</h2>
+<form method="post">
+  {% csrf_token %}
+  <div class="mb-3">
+    <label>First Name</label>
+    <input type="text" name="first_name" class="form-control" required>
+  </div>
+  <div class="mb-3">
+    <label>Last Name</label>
+    <input type="text" name="last_name" class="form-control" required>
+  </div>
+  <div class="mb-3">
+    <label>Roll Number</label>
+    <input type="text" name="roll_number" class="form-control" required>
+  </div>
+  <div class="mb-3">
+    <label>Class</label>
+    <input type="text" name="class_name" class="form-control" required>
+  </div>
+  <div class="mb-3">
+    <label>Section</label>
+    <input type="text" name="section" class="form-control" required>
+  </div>
+
+    <h4>Subjects</h4>
+    <div id="subjects-area">
+      <div class="subject-entry mb-3">
+        <input type="text" name="subject_name[]" placeholder="Subject Name" class="form-control mb-1" required>
+        <input type="number" name="marks_obtained[]" placeholder="Marks Obtained" class="form-control mb-1" required>
+        <input type="number" name="maximum_marks[]" placeholder="Maximum Marks" class="form-control mb-1" required>
+        <input type="text" name="mark_comment[]" placeholder="Comment" class="form-control">  <!-- Changed to mark_comment[] -->
+      </div>
+    </div>
+  <button type="button" onclick="addSubject()" class="btn btn-secondary mb-3">+ Add Subject</button>
+
+  <button type="submit" class="btn btn-primary">Save Student</button>
+</form>
+<script>
+  function addSubject() {
+    const div = document.createElement('div');
+    div.className = "subject-entry mb-3";
+    div.innerHTML = `
+      <input type="text" name="subject_name[]" placeholder="Subject Name" class="form-control mb-1" required>
+      <input type="number" name="marks_obtained[]" placeholder="Marks Obtained" class="form-control mb-1" required>
+      <input type="number" name="maximum_marks[]" placeholder="Maximum Marks" class="form-control mb-1" required>
+      <input type="text" name="mark_comment[]" placeholder="Comment" class="form-control">  <!-- Changed to mark_comment[] -->
+    `;
+    document.getElementById('subjects-area').appendChild(div);
+  }
+</script>
+
+{% endblock %}
